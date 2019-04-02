@@ -9,6 +9,8 @@ let connection = mysql.createConnection({
     database: "glamazon_db"
 });
 
+var serverTracker;
+
 //Show'em the Goods.
 showGoods();
 
@@ -20,17 +22,16 @@ function showGoods() {
         console.log("connected as id " + connection.threadId + "\n");
         //Display'em the goods.
         console.log("Here's the goods...\n");
-        connection.query("SELECT * FROM products", function (err, res) {
+        connection.query("SELECT * FROM glamazon_db.products", function (err, res) {
             if (err) throw err;
             console.table(res);
-            connection.end();
+            // Sell'em the goods.
+            serverTracker = res;
+            sellGoods(serverTracker);
         });
     })
-    sellGoods();
-}
 
-//Sell'em the goods.
-sellGoods();
+}
 
 //Function to sell'em the Goods. Get you some.
 function sellGoods() {
@@ -46,22 +47,18 @@ function sellGoods() {
             message: "How many do you wish to buy?",
             name: "buyamt"
         }
-    ]).then(function (user) {
-        connection.connect(function (err) {
-            if (err) throw err;
-            console.log("connected as id " + connection.threadId + "\n");
-            //TODO: FORMAT THE QUERY TO RETURN A VALUE TO COMPARE to USER.BUYAMT
-            connection.query("SELECT * FROM products WHERE ", function (err, res) {
-                if (err) throw err;
-                console.table(res);
-                connection.end();
-            });
-        });
-
-        console.log("YEW FECKIN DEED IT LAD", res)
-
+    ]).then(function (user, res) {
+        if (!user.buyid) {
+            console.log("We don't carry them goods. Try to buy something I've got.")
+            sellGoods();
+        } else if (user.buyamt < serverTracker[user.buyid-1].stock_quantity) {
+            // TODO: SUBTRACT THE AMOUNT PURCHSED FROM STOCK_QUANTITY
+            console.log("That's an item that exists.")
+            
+        } else {
+            console.log("We don't have that many. Were the pit of "+serverTracker[user.buyid-1]+" so bottomless!");
+        }
     })
 
 
 }
-connection.end();
