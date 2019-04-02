@@ -68,6 +68,10 @@ function sellGoods() {
                 function (err, result) {
                     if (err) throw err
                 })
+                console.log("Purchased! Your items will arrive via orbital drop pod in two hours. DO NOT STAND ON YOUR GLAMAZON DROP PAD DURING THIS TIME. WE WILL NOT BE HELD RESPONSIBLE FOR ANY DEATHS/INJURIES/MAIMINGS OR OTHERWISE AS AGREED IN THE GLAMAZON TERMS OF SERVICE/WAIVER.")
+                console.log("Also your total was "+(user.buyamt*serverTracker[user.buyid-1].price)+". Buy more?");
+                console.table(serverTracker);
+                sellGoods();
         } else {
             console.log("We don't have that many. Were the pit of " + serverTracker[user.buyid - 1] + " so bottomless!");
         }
