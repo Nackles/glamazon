@@ -48,11 +48,11 @@ function sellGoods() {
             name: "buyamt"
         }
     ]).then(function (user, res) {
-        console.log("is this giving gold biscuits", serverTracker[user.buyid - 1].stock_quantity)
+        console.log("Chosen item: ", serverTracker[user.buyid - 1].stock_quantity)
         if (!user.buyid) {
             console.log("We don't carry them goods. Try to buy something I've got.")
             sellGoods();
-        } else if (user.buyamt < serverTracker[user.buyid].stock_quantity) {
+        } else if (user.buyamt < serverTracker[user.buyid-1].stock_quantity) {
             // TODO: YA FUCKIN DID IT KIDDO
             console.log("That's an item that exists.")
             var one = serverTracker[user.buyid - 1].stock_quantity
@@ -68,12 +68,12 @@ function sellGoods() {
                 function (err, result) {
                     if (err) throw err
                 })
-                console.log("Purchased! Your items will arrive via orbital drop pod in two hours. DO NOT STAND ON YOUR GLAMAZON DROP PAD DURING THIS TIME. WE WILL NOT BE HELD RESPONSIBLE FOR ANY DEATHS/INJURIES/MAIMINGS OR OTHERWISE AS AGREED IN THE GLAMAZON TERMS OF SERVICE/WAIVER.")
+                console.log("Purchased! Your items will arrive via orbital drop pod in two hours. \nDO NOT STAND ON YOUR GLAMAZON DROP PAD DURING THIS TIME. \nWE WILL NOT BE HELD RESPONSIBLE FOR ANY DEATHS/INJURIES/MAIMINGS OR OTHERWISE AS AGREED IN THE GLAMAZON TERMS OF SERVICE/WAIVER.")
                 console.log("Also your total was "+(user.buyamt*serverTracker[user.buyid-1].price)+". Buy more?");
                 console.table(serverTracker);
                 sellGoods();
         } else {
-            console.log("We don't have that many. Were the pit of " + serverTracker[user.buyid - 1] + " so bottomless!");
+            console.log("We don't have that many. Were the pit of " + serverTracker[user.buyid - 1].product_name + " so bottomless!");
         }
     })
 
