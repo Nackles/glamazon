@@ -1,6 +1,9 @@
 # Get Glamazon @ Github
 https://github.com/Nackles/glamazon
 
+# Glamazon Demonstration Video
+https://youtu.be/OYIpHGtNBs0
+
 # Glamazon Instructions
 1. Clone the repository to your computer.
 2. Navigate to the root folder using Bash or another CLI, type "npm install", and press enter.
