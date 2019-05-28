@@ -15,6 +15,3 @@ There are no currently known bugs. There is code I would like to refactor, espec
 
 # Nice-to-haves
 I would like to add the second stage of difficulty to the homework assignment. With this groundwork successfully laid out, I do not expect it to take long barring a horrendous/unknown error.
-
-# Video Link
-dubyadubyadubya.thereisnotalinkyet.com
